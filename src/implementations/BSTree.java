@@ -75,11 +75,6 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
   }
 
   @Override
-  public Iterator<E> iterator() {
-    return new BSTreeIterator(TraversalOrder.INORDER);
-  }
-
-  @Override
   public Iterator<E> inorderIterator() {
     return new BSTreeIterator(TraversalOrder.INORDER);
   }
