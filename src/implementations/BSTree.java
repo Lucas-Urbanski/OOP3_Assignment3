@@ -171,15 +171,39 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   @Override
   public BSTreeNode<E> removeMin() {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'removeMin'");
-  }
+	    if (root == null) {
+	    	return null;
+	    }
+	    BSTreeNode<E> findMin = root;
+	    while(findMin.getLeft().getLeft() != null) {
+	    	findMin = findMin.getLeft();
+	    }
+	    BSTreeNode<E> min = findMin.getLeft();
+	    if (findMin.getLeft().getRight() == null) {
+	    	findMin.setLeft(null); 
+	    	return min;
+	    }
+	    findMin.setLeft(min.getRight());
+	    return min;
+	  }
 
-  @Override
-  public BSTreeNode<E> removeMax() {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'removeMax'");
-  }
+	  @Override
+	  public BSTreeNode<E> removeMax() {
+		  if (root == null) {
+		    	return null;
+		    }
+		    BSTreeNode<E> findMin = root;
+		    while(findMin.getRight().getRight() != null) {
+		    	findMin = findMin.getRight();
+		    }
+		    BSTreeNode<E> min = findMin.getRight();
+		    if (findMin.getRight().getLeft() == null) {
+		    	findMin.setRight(null); 
+		    	return min;
+		    }
+		    findMin.setRight(min.getLeft());
+		    return min;
+	  }
 
 	/**
 	 * Returns an iterator that iterates over the elements in the tree in
