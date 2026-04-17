@@ -94,16 +94,19 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	  if (root == null) 
 	  {
 		  root = newNode;
+		  size++;
 		  return true;
 	  }
 	  if (newNode.getElement().compareTo(root.getElement()) > 0)
 	  {
 		  newNode.setRight(root);
 		  root = newNode;
+		  size++;
 		  return true;
 	  } 
 	  else if (newNode.getElement().compareTo(root.getElement()) < 0) {
 		  root.setLeft(newNode);
+		  size++;
 		  return true;
 	  }
 	  return false;
