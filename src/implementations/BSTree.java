@@ -169,6 +169,12 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	  return false;
   }
 
+	/**
+	 * Removes the smallest element in the tree according to the natural ordering
+	 * established by the Comparable implementation.
+	 * 
+	 * @return the removed element or null if the tree is empty
+	 */
   @Override
   public BSTreeNode<E> removeMin() {
 	    if (root == null) {
@@ -187,6 +193,12 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	    return min;
 	  }
 
+	/**
+	 * Removes the largest element in the tree according to the natural ordering
+	 * established by the Comparable implementation.
+	 * 
+	 * @return the removed element or null if the tree is empty
+	 */
 	  @Override
 	  public BSTreeNode<E> removeMax() {
 		  if (root == null) {
