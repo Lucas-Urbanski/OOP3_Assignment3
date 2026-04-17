@@ -1,5 +1,6 @@
 package implementations;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import utilities.BSTreeADT;
@@ -21,8 +22,10 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   @Override
   public BSTreeNode<E> getRoot() throws NullPointerException {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'getRoot'");
+    if (root == null){
+      throw new NullPointerException("The tree is empty");
+    }
+    return root;
   }
 
   @Override
@@ -33,32 +36,41 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   @Override
   public int size() {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'size'");
+    return size;
   }
 
   @Override
   public boolean isEmpty() {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+    return size == 0;
   }
 
   @Override
   public void clear() {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'clear'");
+    root = null;
+    size = 0;
   }
 
   @Override
   public boolean contains(E entry) throws NullPointerException {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'contains'");
+    if (entry == null){
+      throw new NullPointerException("Entry is null");
+    }
+    return search(entry) != null;
   }
 
   @Override
   public BSTreeNode<E> search(E entry) throws NullPointerException {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'search'");
+    if (entry == null){
+      throw new NullPointerException("Entry is null");
+    }
+    BSTreeNode<E> current = root;
+    while (current != null){
+      int compar = entry.compareTo(current.getElement());
+      if (compar < 0) current = current.getLeft();
+      else if (compar > 0) current = current.getRight();
+      else return current;
+    }
+    return null;
   }
 
   @Override
@@ -96,10 +108,39 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   private class BSTreeIterator implements Iterator<E> {
 
+    private ArrayList<E> list = new ArrayList<>();
     public BSTreeIterator(TraversalOrder order) {
-      // TODO: walk the tree according to 'order'
+      
+      switch (order) {
+        case INORDER: walkInorder(root);
+          break;
+        case PREORDER: walkPreorder(root);
+          break;
+        case POSTORDER: walkPostorder(root);
+          break;
+      }
     }
 
+    private void walkInorder(BSTreeNode<E> node){
+      if (node == null) return;
+      walkInorder(node.getLeft());
+      list.add(node.getElement());
+      walkInorder(node.getRight());
+    }
+
+    private void walkPreorder(BSTreeNode<E> node){
+      if (node == null) return;
+      list.add(node.getElement());
+      walkPreorder(node.getLeft());
+      walkPreorder(node.getRight());
+    }
+
+    private void walkPostorder(BSTreeNode<E> node){
+      if (node == null) return;
+      walkPostorder(node.getLeft());
+      walkPostorder(node.getRight());
+      list.add(node.getElement());
+    }
     @Override
     public boolean hasNext() {
       // TODO
