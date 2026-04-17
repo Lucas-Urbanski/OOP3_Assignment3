@@ -126,6 +126,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     if (entry == null){
       throw new NullPointerException("Entry is null");
     }
+    if (root == null) throw new NullPointerException("Tree is empty");
     BSTreeNode<E> current = root;
     while (current != null){
       int compar = entry.compareTo(current.getElement());
