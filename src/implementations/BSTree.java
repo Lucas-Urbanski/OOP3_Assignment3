@@ -8,9 +8,16 @@ import utilities.Iterator;
 
 public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
+  // Attributes
   private BSTreeNode<E> root;
   private int size;
 
+  /** 
+   * Enumeratino to specify the order of traversal for the iterators.
+   * INORDER: left subtree, current node, right subtree
+   * PREORDER: current node, left subtree, right subtree
+   * POSTORDER: left subtree, right subtree, current node
+   */
   private enum TraversalOrder {
     INORDER, PREORDER, POSTORDER
   }
@@ -263,6 +270,13 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     return new BSTreeIterator(TraversalOrder.POSTORDER);
   }
 
+  /**
+   * A class that implements the Iterator<E> interface to provide an iteration over the elements in the binary search tree.
+   * The iteratot uses an ArrayList to store the elements in the order they are visited during the traversal of the tree.
+   * The elements are returned in a specific order inorder, preorder or postorder.
+   * 
+   * @param <E>
+   */
   private class BSTreeIterator implements Iterator<E> {
 
     private ArrayList<E> list = new ArrayList<>();
