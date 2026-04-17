@@ -17,14 +17,24 @@ public class BSTreeNode<E> {
     this.right = right;
   }
 
-  
-
   public BSTreeNode<E> getLeft(){
 	  return this.left;
   }
   
   public BSTreeNode<E> getRight(){
 	  return this.right;
+  }
+
+  public void setLeft(BSTreeNode<E> left){
+    this.left = left;
+  }
+
+  public void setRight(BSTreeNode<E> right){
+    this.right = right;
+  }
+
+  public boolean leaf() {
+    return (this.left == null && this.right == null);
   }
   
   public E getElement(){
