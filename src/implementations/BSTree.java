@@ -35,8 +35,14 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   @Override
   public int getHeight() {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'getHeight'");
+    return height(root);
+  }
+
+  private int height(BSTreeNode<E> node) {
+    if (node == null) return 0;
+    int leftHeight = height(node.getLeft());
+    int rightHeight = height(node.getRight());
+    return Math.max(leftHeight, rightHeight) + 1;
   }
 
   @Override
@@ -136,45 +142,46 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     public BSTreeIterator(TraversalOrder order) {
       
       switch (order) {
-        case INORDER: walkInorder(root);
+        case INORDER: inorder(root);
           break;
-        case PREORDER: walkPreorder(root);
+        case PREORDER: prereorder(root);
           break;
-        case POSTORDER: walkPostorder(root);
+        case POSTORDER: postorder(root);
           break;
       }
     }
 
-    private void walkInorder(BSTreeNode<E> node){
+    private void inorder(BSTreeNode<E> node){
       if (node == null) return;
-      walkInorder(node.getLeft());
+      inorder(node.getLeft());
       list.add(node.getElement());
-      walkInorder(node.getRight());
+      inorder(node.getRight());
     }
 
-    private void walkPreorder(BSTreeNode<E> node){
+    private void prereorder(BSTreeNode<E> node){
       if (node == null) return;
       list.add(node.getElement());
-      walkPreorder(node.getLeft());
-      walkPreorder(node.getRight());
+      prereorder(node.getLeft());
+      prereorder(node.getRight());
     }
 
-    private void walkPostorder(BSTreeNode<E> node){
+    private void postorder(BSTreeNode<E> node){
       if (node == null) return;
-      walkPostorder(node.getLeft());
-      walkPostorder(node.getRight());
+      postorder(node.getLeft());
+      postorder(node.getRight());
       list.add(node.getElement());
     }
     @Override
     public boolean hasNext() {
-      // TODO
-      return false;
+      return !list.isEmpty();
     }
 
     @Override
     public E next() throws NoSuchElementException {
-      // TODO
-      return null;
+      if (list.isEmpty()){
+        throw new NoSuchElementException("No more elements in the iterator");
+      }
+      return list.remove(0);
     }
   }
 }
