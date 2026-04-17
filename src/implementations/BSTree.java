@@ -6,6 +6,14 @@ import java.util.NoSuchElementException;
 import utilities.BSTreeADT;
 import utilities.Iterator;
 
+/**
+ * BSTree.java
+ * 
+ * @author Xander Mulligan and Lucas Urbanski
+ * @version 1.0
+ * 
+ * Class Description: Implementation of the BSTreeADT interface.
+ */
 public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   // Attributes
@@ -21,12 +29,18 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
   private enum TraversalOrder {
     INORDER, PREORDER, POSTORDER
   }
-
+  
+  /**
+   * Constructs an BSTree with no starting root
+   */
   public BSTree() {
     root = null;
     size = 0;
   }
   
+  /**
+   * Constructs an BSTree with an starting root
+   */
   public BSTree(E firstNode) {
 	root = new BSTreeNode<E>(firstNode);
 	size = 1;
@@ -197,6 +211,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	    while(findMin.getLeft().getLeft() != null) {
 	    	findMin = findMin.getLeft();
 	    }
+	    size--;
 	    BSTreeNode<E> min = findMin.getLeft();
 	    if (findMin.getLeft().getRight() == null) {
 	    	findMin.setLeft(null); 
@@ -217,17 +232,18 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 		  if (root == null) {
 		    	return null;
 		    }
-		    BSTreeNode<E> findMin = root;
-		    while(findMin.getRight().getRight() != null) {
-		    	findMin = findMin.getRight();
+		    BSTreeNode<E> findMax = root;
+		    while(findMax.getRight().getRight() != null) {
+		    	findMax = findMax.getRight();
 		    }
-		    BSTreeNode<E> min = findMin.getRight();
-		    if (findMin.getRight().getLeft() == null) {
-		    	findMin.setRight(null); 
-		    	return min;
+		    size--;
+		    BSTreeNode<E> max = findMax.getRight();
+		    if (findMax.getRight().getLeft() == null) {
+		    	findMax.setRight(null); 
+		    	return max;
 		    }
-		    findMin.setRight(min.getLeft());
-		    return min;
+		    findMax.setRight(max.getLeft());
+		    return max;
 	  }
 
 	/**
@@ -280,6 +296,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
   private class BSTreeIterator implements Iterator<E> {
 
     private ArrayList<E> list = new ArrayList<>();
+    
     public BSTreeIterator(TraversalOrder order) {
       
       switch (order) {

@@ -1,10 +1,21 @@
 package implementations;
 
+/**
+ * BSTreeNode.java
+ * 
+ * @author Xander Mulligan and Lucas Urbanski
+ * @version 1.0
+ * 
+ * Class Description: Node Class used in the BSTree class.
+ */
 public class BSTreeNode<E> {
   private E data;
   private BSTreeNode<E> left;
   private BSTreeNode<E> right;
 
+  /**
+   * Constructs an BSTreeNode with the inputed data
+   */
   public BSTreeNode(E data) {
     this.data = data;
     this.left = null;
