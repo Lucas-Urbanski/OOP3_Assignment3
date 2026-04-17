@@ -11,4 +11,11 @@ public class BSTreeNode<E> {
     this.right = null;
   }
 
+  public BSTreeNode<E> getLeft(){
+	  return this.left;
+  }
+  
+  public BSTreeNode<E> getRight(){
+	  return this.right;
+  }
 }
