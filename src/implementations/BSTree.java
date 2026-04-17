@@ -14,6 +14,11 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     INORDER, PREORDER, POSTORDER
   }
 
+  public BSTree() {
+    root = null;
+    size = 0;
+  }
+
   @Override
   public BSTreeNode<E> getRoot() throws NullPointerException {
     // TODO
