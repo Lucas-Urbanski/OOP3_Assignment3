@@ -126,12 +126,11 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     if (entry == null){
       throw new NullPointerException("Entry is null");
     }
-    if (root == null) throw new NullPointerException("Tree is empty");
     BSTreeNode<E> current = root;
     while (current != null){
-      int compar = entry.compareTo(current.getElement());
-      if (compar < 0) current = current.getLeft();
-      else if (compar > 0) current = current.getRight();
+      int cmpare = entry.compareTo(current.getElement());
+      if (cmpare < 0) current = current.getLeft();
+      else if (cmpare > 0) current = current.getRight();
       else return current;
     }
     return null;
@@ -147,30 +146,33 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
  */
   @Override
   public boolean add(E newEntry) throws NullPointerException {
-	  if (newEntry == null)
-	  {
-			throw new NullPointerException("Null elements are not allowed.");
-	  }
-	  BSTreeNode<E> newNode = new BSTreeNode<E>(newEntry);
-	  if (root == null) 
-	  {
-		  root = newNode;
-		  size++;
-		  return true;
-	  }
-	  if (newNode.getElement().compareTo(root.getElement()) > 0)
-	  {
-		  newNode.setRight(root);
-		  root = newNode;
-		  size++;
-		  return true;
-	  } 
-	  else if (newNode.getElement().compareTo(root.getElement()) < 0) {
-		  root.setLeft(newNode);
-		  size++;
-		  return true;
-	  }
-	  return false;
+      if (newEntry == null) throw new NullPointerException("Entry cannot be null.");
+      if (root == null) {
+          root = new BSTreeNode<>(newEntry);
+          size++;
+          return true;
+      }
+      BSTreeNode<E> current = root;
+      while (true) {
+          int cmpare = newEntry.compareTo(current.getElement());
+          if (cmpare < 0) {
+              if (current.getLeft() == null) {
+                  current.setLeft(new BSTreeNode<>(newEntry));
+                  size++;
+                  return true;
+              }
+              current = current.getLeft();
+          } else if (cmpare > 0) {
+              if (current.getRight() == null) {
+                  current.setRight(new BSTreeNode<>(newEntry));
+                  size++;
+                  return true;
+              }
+              current = current.getRight();
+          } else {
+              return false; // duplicate rejected
+          }
+      }
   }
 
 	/**
