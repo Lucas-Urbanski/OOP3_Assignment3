@@ -19,4 +19,15 @@ public class BSTreeNode<E> {
 
   
 
+  public BSTreeNode<E> getLeft(){
+	  return this.left;
+  }
+  
+  public BSTreeNode<E> getRight(){
+	  return this.right;
+  }
+  
+  public E getElement(){
+	  return this.data;
+  }
 }
