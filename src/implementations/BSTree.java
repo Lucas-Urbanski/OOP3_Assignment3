@@ -18,6 +18,11 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     root = null;
     size = 0;
   }
+  
+  public BSTree(E firstNode) {
+	root = new BSTreeNode<E>(firstNode);
+	size = 1;
+  }
 
   @Override
   public BSTreeNode<E> getRoot() throws NullPointerException {
@@ -63,8 +68,27 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
   @Override
   public boolean add(E newEntry) throws NullPointerException {
-    // TODO
-    throw new UnsupportedOperationException("Unimplemented method 'add'");
+	  if (newEntry == null)
+	  {
+			throw new NullPointerException("Null elements are not allowed.");
+	  }
+	  BSTreeNode<E> newNode = new BSTreeNode<E>(newEntry);
+	  if (root == null) 
+	  {
+		  root = newNode;
+		  return true;
+	  }
+	  if (newNode.getElement().compareTo(root.getElement()) > 0)
+	  {
+		  newNode.setRight(root);
+		  root = newNode;
+		  return true;
+	  } 
+	  else if (newNode.getElement().compareTo(root.getElement()) < 0) {
+		  root.setLeft(newNode);
+		  return true;
+	  }
+	  return false;
   }
 
   @Override
