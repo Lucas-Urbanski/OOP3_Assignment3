@@ -1,5 +1,7 @@
 package implementations;
 
+import java.io.Serializable;
+
 /**
  * BSTreeNode.java
  * 
@@ -8,7 +10,10 @@ package implementations;
  * 
  * Class Description: Node Class used in the BSTree class.
  */
-public class BSTreeNode<E> {
+public class BSTreeNode<E> implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+
   private E data;
   private BSTreeNode<E> left;
   private BSTreeNode<E> right;

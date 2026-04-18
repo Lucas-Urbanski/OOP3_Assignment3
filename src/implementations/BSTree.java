@@ -1,5 +1,6 @@
 package implementations;
 
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -14,7 +15,9 @@ import utilities.Iterator;
  * 
  * Class Description: Implementation of the BSTreeADT interface.
  */
-public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
+public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   // Attributes
   private BSTreeNode<E> root;

@@ -1,0 +1,7 @@
+binary: test1.txt -> 3 | frequency: 1
+hello: test1.txt -> 1, 2 | frequency: 2
+of: test1.txt -> 4 | frequency: 1
+search: test1.txt -> 3 | frequency: 1
+tree: test1.txt -> 2, 3 | frequency: 2
+words: test1.txt -> 4 | frequency: 1
+world: test1.txt -> 1, 4 | frequency: 2
