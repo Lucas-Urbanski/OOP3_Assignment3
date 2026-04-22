@@ -1,4 +1,0 @@
-Hello world
-Hello tree
-Binary search tree
-World of words

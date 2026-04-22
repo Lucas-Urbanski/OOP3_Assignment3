@@ -126,7 +126,17 @@ public class WordTracker {
      * @throws IOException if the file cannot be read
      */
     private static void buildTreeFromFile(BSTree<TrackedWord> tree, String inputFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        File actualFile = new File(inputFile);
+
+        if (!actualFile.exists()) {
+            actualFile = new File("res", inputFile);
+        }
+
+        if (!actualFile.exists()) {
+            throw new IOException("Input file not found: " + inputFile);
+        }
+
+        BufferedReader reader = new BufferedReader(new FileReader(actualFile));
         String line;
         int lineNumber = 0;
 
